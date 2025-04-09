@@ -1,17 +1,18 @@
 package com.projects.todo_app.Todos;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity(name="todos")
 public class todo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "todoItem",nullable = false)
     private String todoItem;
+
+    @Column(name = "status",nullable = false)
     private boolean status;
 
     public todo() {
