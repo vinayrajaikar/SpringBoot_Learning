@@ -18,17 +18,20 @@ public class todo_controller {
         this.todoService = todoService;
     }
 
-    @GetMapping("/get_todos")
-    public Map<String,Object>get_todos(){
-        List<todo>todos = todoService.getTodos();
+    @GetMapping("/get_todos/{userId}")
+    public Map<String,Object>get_todos(@PathVariable int userId){
+        List<todo>todos = todoService.getTodos(userId);
         Map<String,Object>response = new HashMap<>();
+        response.put("message","Todo fetched successfully");
         response.put("todos",todos);
         return response;
     }
 
-    @PostMapping("/add_todo")
-    public Map<String,Object> add_todo(@RequestBody todo Todo){
-        todo addedTodo = todoService.addTodo(Todo);
+    @PostMapping("/add_todo/{userId}")
+    public Map<String,Object>
+        add_todo(@RequestBody todo Todo, @PathVariable int userId)
+    {
+        todo addedTodo = todoService.addTodo(Todo,userId);
         Map<String,Object> response = new HashMap<>();
         response.put("message","Todo added successfully");
         response.put("todo",addedTodo);

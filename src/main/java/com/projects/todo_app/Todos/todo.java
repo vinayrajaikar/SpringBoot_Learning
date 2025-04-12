@@ -1,6 +1,8 @@
 package com.projects.todo_app.Todos;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.projects.todo_app.Users.user;
 import jakarta.persistence.*;
 
 @Entity(name="todos")
@@ -15,7 +17,20 @@ public class todo {
     @Column(name = "status",nullable = false)
     private boolean status;
 
+    @ManyToOne
+    @JoinColumn(name="user_id",nullable = false)
+    @JsonBackReference
+    private user user;
+
     public todo() {
+    }
+
+    public user getUser() {
+        return user;
+    }
+
+    public void setUser(user user) {
+        this.user = user;
     }
 
     public todo(String todoItem, boolean status) {
